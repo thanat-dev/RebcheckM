@@ -65,13 +65,31 @@ export default function Connect() {
   }
 
   const hasNetwork = serverInfo.urls.length > 0;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-900">เชื่อมต่อมือถือ</h1>
-        <p className="text-gray-500 mt-1">สแกน QR Code หรือพิมพ์ URL เพื่อเปิดแอปบนมือถือ</p>
+        <p className="text-gray-500 mt-1">
+          {isMobile
+            ? 'คุณกำลังเปิดจากมือถืออยู่แล้ว! ใช้งานได้เลย'
+            : 'สแกน QR Code หรือพิมพ์ URL เพื่อเปิดแอปบนมือถือ'
+          }
+        </p>
       </div>
+
+      {/* ถ้าเปิดจากมือถืออยู่แล้ว */}
+      {isMobile && (
+        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-center">
+          <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto mb-2" />
+          <h2 className="font-semibold text-emerald-800 text-lg">เชื่อมต่อสำเร็จแล้ว!</h2>
+          <p className="text-sm text-emerald-700 mt-1">คุณกำลังใช้งาน RebcheckM บนมือถืออยู่</p>
+          <p className="text-xs text-emerald-600 mt-2">
+            หน้านี้ไว้สำหรับเปิดบนคอมพิวเตอร์ เพื่อแสดง QR Code ให้มือถือสแกน
+          </p>
+        </div>
+      )}
 
       {/* QR Code Card */}
       {hasNetwork ? (
