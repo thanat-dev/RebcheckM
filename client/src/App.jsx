@@ -9,6 +9,7 @@ import LineSend from './pages/LineSend';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import Guide from './pages/Guide';
+import Connect from './pages/Connect';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/guide" element={<Guide />} />
+        <Route path="/connect" element={<Connect />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

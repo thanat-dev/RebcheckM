@@ -65,4 +65,7 @@ export const api = {
   // Reports
   getDashboard: () => request('/reports/dashboard'),
   getMonthlyReport: (params) => request(`/reports/monthly?${new URLSearchParams(params || {})}`),
+
+  // Server Info
+  getServerInfo: () => request('/server-info'),
 };

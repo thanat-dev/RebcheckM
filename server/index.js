@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const os = require('os');
 const { initDatabase } = require('./db/init');
 
 initDatabase();
@@ -20,6 +21,7 @@ app.use('/api/checks', require('./routes/checks'));
 app.use('/api/line', require('./routes/line'));
 app.use('/api/settings', require('./routes/settings'));
 app.use('/api/reports', require('./routes/reports'));
+app.use('/api/server-info', require('./routes/serverinfo'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
@@ -33,6 +35,27 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`RebcheckM server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log('');
+  console.log('  ╔══════════════════════════════════════════╗');
+  console.log('  ║        RebcheckM Server Started          ║');
+  console.log('  ╠══════════════════════════════════════════╣');
+  console.log(`  ║  Local:   http://localhost:${PORT}          ║`);
+
+  const interfaces = os.networkInterfaces();
+  for (const [name, addrs] of Object.entries(interfaces)) {
+    for (const addr of addrs) {
+      if (addr.family === 'IPv4' && !addr.internal) {
+        const url = `http://${addr.address}:${PORT}`;
+        const pad = ' '.repeat(Math.max(0, 35 - url.length));
+        console.log(`  ║  WiFi:    ${url}${pad}║`);
+      }
+    }
+  }
+
+  console.log('  ╠══════════════════════════════════════════╣');
+  console.log('  ║  เปิด URL ด้านบนจาก Browser มือถือ       ║');
+  console.log('  ║  (มือถือต้องอยู่ WiFi เดียวกัน)            ║');
+  console.log('  ╚══════════════════════════════════════════╝');
+  console.log('');
 });

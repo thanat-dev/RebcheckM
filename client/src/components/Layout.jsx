@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, MapPin, FileCheck, Users, Send,
-  BarChart3, Settings, Menu, X, Receipt, BookOpen
+  BarChart3, Settings, Menu, X, Receipt, BookOpen, Smartphone
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,6 +13,7 @@ const navItems = [
   { path: '/line', label: 'ส่ง LINE', icon: Send },
   { path: '/reports', label: 'รายงาน', icon: BarChart3 },
   { path: '/settings', label: 'ตั้งค่า', icon: Settings },
+  { path: '/connect', label: 'เชื่อมต่อมือถือ', icon: Smartphone },
   { path: '/guide', label: 'คู่มือใช้งาน', icon: BookOpen },
 ];
 

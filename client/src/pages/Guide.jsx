@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Smartphone, Wifi, Globe, Plus, Key, Send, MapPin,
   FileCheck, Users, ChevronDown, ChevronRight, CheckCircle2,
   ExternalLink, Share2, MoreVertical, Download,
-  ArrowRight, Bookmark, Settings, CircleDot
+  ArrowRight, Bookmark, Settings, CircleDot, QrCode
 } from 'lucide-react';
 
 function StepCard({ stepNum, title, children, color = 'primary' }) {
@@ -117,23 +118,42 @@ export default function Guide() {
         color="blue"
         defaultOpen={true}
       >
-        <StepCard stepNum="1" title="เปิด Browser บนมือถือ" color="blue">
-          <p>เปิด <strong>Chrome</strong> (Android) หรือ <strong>Safari</strong> (iPhone)</p>
+        <StepCard stepNum="1" title="เชื่อมต่อ WiFi เดียวกัน" color="blue">
+          <p>มือถือต้องเชื่อมต่อ <strong>WiFi เดียวกัน</strong>กับเครื่องที่รันแอป</p>
         </StepCard>
 
-        <StepCard stepNum="2" title="พิมพ์ที่อยู่เว็บ" color="blue">
-          <p>พิมพ์ URL ของ RebcheckM ลงใน address bar:</p>
-          <div className="bg-gray-100 rounded-lg px-3 py-2 font-mono text-sm text-gray-800 flex items-center gap-2 mt-1">
-            <Globe className="w-4 h-4 text-gray-400 flex-shrink-0" />
-            <span>http://&lt;IP-เครื่อง&gt;:3001</span>
+        <StepCard stepNum="2" title="หา URL สำหรับเปิดจากมือถือ" color="blue">
+          <p>URL หาได้ 2 วิธี:</p>
+
+          <div className="space-y-2 mt-2">
+            <Link to="/connect" className="flex items-center gap-3 bg-primary-50 border border-primary-200 rounded-xl px-4 py-3 hover:bg-primary-100 transition-colors">
+              <QrCode className="w-6 h-6 text-primary-600 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium text-primary-700">วิธีง่ายสุด: ไปหน้า "เชื่อมต่อมือถือ"</p>
+                <p className="text-xs text-primary-500">แอปจะแสดง QR Code สแกนเปิดได้เลย กดตรงนี้</p>
+              </div>
+            </Link>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
+              <p className="text-sm font-medium text-gray-700">วิธีที่ 2: ดูจาก Terminal ตอนรันแอป</p>
+              <p className="text-xs text-gray-500 mt-0.5">เมื่อรัน <code className="bg-gray-200 px-1 rounded">npm run dev</code> จะแสดง URL บนหน้าจอ เช่น:</p>
+              <div className="bg-gray-900 rounded-lg px-3 py-2 mt-2 font-mono text-xs">
+                <p className="text-gray-400">╔══════════════════════════════════╗</p>
+                <p className="text-gray-400">║  Local:   <span className="text-blue-400">http://localhost:3001</span></p>
+                <p className="text-gray-400">║  WiFi:    <span className="text-green-400">http://192.168.1.100:3001</span></p>
+                <p className="text-gray-400">╚══════════════════════════════════╝</p>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">ให้ใช้ URL ในบรรทัด <strong>"WiFi:"</strong> เปิดจาก Browser มือถือ</p>
+            </div>
           </div>
-          <Tip>
-            ถ้ารันบนเครื่องเดียวกัน ใช้ <strong>http://localhost:3001</strong> ได้เลย
-            ถ้าอยู่วง WiFi เดียวกัน ให้ใช้ IP ของเครื่องที่รัน เช่น <strong>http://192.168.1.xx:3001</strong>
-          </Tip>
         </StepCard>
 
-        <StepCard stepNum="3" title="หน้าจอ RebcheckM จะแสดงขึ้น" color="blue">
+        <StepCard stepNum="3" title="เปิด Browser บนมือถือ แล้วพิมพ์ URL" color="blue">
+          <p>เปิด <strong>Chrome</strong> (Android) หรือ <strong>Safari</strong> (iPhone)</p>
+          <p>พิมพ์ URL ที่ได้จากขั้นตอนที่ 2 หรือสแกน QR Code</p>
+        </StepCard>
+
+        <StepCard stepNum="4" title="หน้าจอ RebcheckM จะแสดงขึ้น" color="blue">
           <MockPhone title="RebcheckM">
             <div className="space-y-2">
               <div className="flex items-center gap-2 mb-3">
