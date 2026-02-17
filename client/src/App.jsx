@@ -8,6 +8,7 @@ import Customers from './pages/Customers';
 import LineSend from './pages/LineSend';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import Guide from './pages/Guide';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/line" element={<LineSend />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/guide" element={<Guide />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
