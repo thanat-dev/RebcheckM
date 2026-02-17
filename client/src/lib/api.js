@@ -52,6 +52,10 @@ export const api = {
   sendLine: (data) => request('/line/send', { method: 'POST', body: data }),
   sendDailySummary: (data) => request('/line/send-daily-summary', { method: 'POST', body: data }),
   sendCheckToLine: (checkId) => request(`/line/send-check/${checkId}`, { method: 'POST' }),
+  sendTodayPlan: (data) => request('/line/send-today-plan', { method: 'POST', body: data }),
+  sendDepositStatus: (data) => request('/line/send-deposit-status', { method: 'POST', body: data }),
+  previewTodayPlan: (params) => request(`/line/preview-today-plan?${new URLSearchParams(params || {})}`),
+  previewDepositStatus: (params) => request(`/line/preview-deposit-status?${new URLSearchParams(params || {})}`),
   getLineHistory: () => request('/line/history'),
 
   // Settings
